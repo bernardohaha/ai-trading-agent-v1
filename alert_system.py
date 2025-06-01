@@ -1,17 +1,36 @@
-import datetime
+import os
+from telegram import Bot
+from dotenv import load_dotenv
+
+# Carregar variáveis de ambiente do .env
+load_dotenv()
 
 
 class AlertSystem:
     def __init__(self):
-        pass  # Podemos depois ligar API de Telegram ou Email aqui
+        self.telegram_token = os.getenv("TELEGRAM_BOT_TOKEN")
+        self.telegram_chat_id = os.getenv("TELEGRAM_CHAT_ID")
+        self.bot = Bot(token=self.telegram_token)
 
     def send_alert(self, message, zone, decision, support, resistance, price):
-        timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        print(f"\n=== ALERTA ({timestamp}) ===")
-        print(f"Mensagem: {message}")
-        print(f"Zona atual: {zone}")
-        print(f"Decisão AI: {decision}")
-        print(f"Preço Atual: {price:.2f}")
-        print(f"Suporte: {support}")
-        print(f"Resistência: {resistance}")
-        print(f"=============================\n")
+        alert_msg = f"""
+🟢 [AI Trading Agent] Novo Sinal 📊
+
+📈 Zona Atual: {zone}
+🎯 Decisão: {decision}
+💰 Preço Atual: {price}
+
+🔻 Suporte: {support}
+🔺 Resistência: {resistance}
+
+"""
+        full_msg = f"{message}\n{alert_msg}"
+
+        # Enviar para o Telegram
+        try:
+            self.bot.send_message(chat_id=self.telegram_chat_id, text=full_msg)
+        except Exception as e:
+            print(f"[Telegram Error]: {e}")
+
+        # Print local para debugging também
+        print(full_msg)

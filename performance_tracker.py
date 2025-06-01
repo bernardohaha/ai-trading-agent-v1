@@ -2,13 +2,15 @@ import json
 
 
 class PerformanceTracker:
-    def __init__(self, log_file="performance_log.json"):
+    def __init__(self, log_file="performance_log.json", trades_file="trades_log.json"):
         self.trades = []
         self.log_file = log_file
+        self.trades_file = trades_file
 
     def log_trade(self, pnl):
         self.trades.append(pnl)
         self.save_performance()
+        self.save_trades()
 
     def save_performance(self):
         total_trades = len(self.trades)
@@ -36,6 +38,10 @@ class PerformanceTracker:
 
         with open(self.log_file, "w") as f:
             json.dump(data, f)
+
+    def save_trades(self):
+        with open(self.trades_file, "w") as f:
+            json.dump(self.trades, f)
 
     def get_report(self):
         total_trades = len(self.trades)
