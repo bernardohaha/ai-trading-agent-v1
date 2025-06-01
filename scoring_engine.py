@@ -2,7 +2,7 @@ class ScoringEngine:
     def __init__(self):
         pass
 
-    def calculate_score(self, ohlcv, fib_levels, zone, current_price):
+    def calculate_score(self, ohlcv, fib_levels, zone, renko_trend, current_price):
         score = 0
 
         # RSI
@@ -26,6 +26,10 @@ class ScoringEngine:
 
         # Zona do suporte/resistência
         if zone == "BUY ZONE":
+            score += 1
+
+        # Renko Trend
+        if renko_trend == "UP":
             score += 1
 
         return score
