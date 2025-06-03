@@ -1,10 +1,10 @@
-from data_collector import DataCollector
-from technical_analysis import TechnicalAnalyzer
-from support_resistance_engine import SupportResistanceEngine
-from decision_engine import DecisionEngine
-from alert_system import AlertSystem
-from paper_trader import PaperTrader
-from scoring_engine import ScoringEngine
+from ai_trading_agent.ai_trading_agent.data.data_collector import DataCollector
+from ai_trading_agent.ai_trading_agent.core.technical_analysis import TechnicalAnalyzer
+from ai_trading_agent.ai_trading_agent.strategies.support_resistance_engine import SupportResistanceEngine
+from ai_trading_agent.ai_trading_agent.core.decision_engine import DecisionEngine
+from ai_trading_agent.ai_trading_agent.core.alert_system import AlertSystem
+from ai_trading_agent.ai_trading_agent.strategies.paper_trader import PaperTrader
+from ai_trading_agent.ai_trading_agent.core.scoring_engine import ScoringEngine
 
 # Recolha de dados
 collector = DataCollector()
